@@ -16,17 +16,21 @@ class ContentsTableSeeder extends Seeder
     public function run()
     {
         $faker = Factory::create();
-        $category = Category::inRandomOrder()->first();
-        $user = User::inRandomOrder()->first();
+        $category = Category::inRandomOrder()->first()->id;
+        $user = User::inRandomOrder()->first()->id;
 
         for ($i=0; $i < 100; $i++) {
-            Content::create([
-                'category_id' => $category->id,
-                'user_id' => $user->id,
+            $content = Content::create([
+                'category_id' => $category,
+                'user_id' => $user,
                 'title' => $faker->name,
                 'slug' => str_slug($faker->name),
-                'body' => $faker->paragraphs(rand(1, 6)),
+                'body' => $faker->paragraphs(rand(1, 6), true),
+                'created_at' => now(),
             ]);
+
+            $url = 'https://picsum.photos/200/300/?random';
+            $content->addMediaFromUrl($url)->toMediaCollection();
         }
     }
 }
