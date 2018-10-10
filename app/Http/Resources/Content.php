@@ -23,7 +23,8 @@ class Content extends JsonResource
             'media' => $this->getMedia(),
             'title' => $this->title,
             'slug' => $this->slug,
-            'body' => $this->body
+            'body' => $this->body,
+            'image_cover' => $this->getFirstMediaUrl(),
         ];
     }
 }
