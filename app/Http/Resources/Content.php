@@ -24,7 +24,7 @@ class Content extends JsonResource
             'title' => $this->title,
             'slug' => $this->slug,
             'body' => $this->body,
-            'image_cover' => $this->getFirstMediaUrl(),
+            'image_cover' => $this->getFirstMedia()->getFullUrl(),
         ];
     }
 }
